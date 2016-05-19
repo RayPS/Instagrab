@@ -12,7 +12,23 @@
 		71FB5BC91CED9D840024956D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5BC71CED9D840024956D /* Main.storyboard */; };
 		71FB5BCB1CED9D840024956D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5BCA1CED9D840024956D /* Assets.xcassets */; };
 		71FB5BCE1CED9D840024956D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5BCC1CED9D840024956D /* LaunchScreen.storyboard */; };
+		71FB5BD61CEDA01A0024956D /* Kanna.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71FB5BD51CEDA01A0024956D /* Kanna.framework */; };
+		71FB5BD71CEDA01A0024956D /* Kanna.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 71FB5BD51CEDA01A0024956D /* Kanna.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		71FB5BD81CEDA01A0024956D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				71FB5BD71CEDA01A0024956D /* Kanna.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		71FB5BC01CED9D840024956D /* Instagrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		71FB5BCA1CED9D840024956D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		71FB5BCD1CED9D840024956D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		71FB5BCF1CED9D840024956D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71FB5BD51CEDA01A0024956D /* Kanna.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kanna.framework; path = Carthage/Build/iOS/Kanna.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71FB5BD61CEDA01A0024956D /* Kanna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +56,7 @@
 		71FB5BB71CED9D840024956D = {
 			isa = PBXGroup;
 			children = (
+				71FB5BD51CEDA01A0024956D /* Kanna.framework */,
 				71FB5BC21CED9D840024956D /* Instagrab */,
 				71FB5BC11CED9D840024956D /* Products */,
 			);
@@ -74,6 +93,7 @@
 				71FB5BBC1CED9D840024956D /* Sources */,
 				71FB5BBD1CED9D840024956D /* Frameworks */,
 				71FB5BBE1CED9D840024956D /* Resources */,
+				71FB5BD81CEDA01A0024956D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -251,6 +271,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = Instagrab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rayps.Instagrab;
@@ -262,6 +287,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				HEADER_SEARCH_PATHS = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = Instagrab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = rayps.Instagrab;
