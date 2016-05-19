@@ -8,28 +8,43 @@
 
 import UIKit
 import Kanna
+import PlayerView
+import AVFoundation
 
 class ViewController: UIViewController {
     
-    let myURLString: String = "https://www.instagram.com/p/BFk9vOTEcGj/"
-//    let myURLString: String = "https://www.instagram.com/p/BFkpmSIx5KT/"
+    @IBOutlet var player: PlayerView!
+    
+//    let testUrl = "https://instagram.com/p/BAwilKUtf2H/"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
-        
-        
-        grabContent { (result) in
-            print(result)
-        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ViewController.getTheShit), name:
+        UIApplicationWillEnterForegroundNotification, object: nil)
+        getTheShit()
     }
     
     
-    
-    func grabContent(completion: (result: String) -> Void) {
-        grabHTML(myURLString) { (document) in
+    func getTheShit() {
+        let pasteboardString: String? = UIPasteboard.generalPasteboard().string
+        guard let pbsurl = NSURL(string: pasteboardString!) else {
+            print("Error: \(pasteboardString) doesn't seem to be a valid URL")
+            return
+        }
+        
+        grabContent (pbsurl){ (result) in
+            print(result)
+            if let url = NSURL(string: result) {
+                
+                self.player.url = url
+                self.player.play()
+            }
+        }
+    }
+
+    func grabContent(url: NSURL, completion: (result: String) -> Void) {
+        grabHTML(url) { (document) in
             
             let video: XMLNodeSet = document.css("meta[property='og:video']")
             let image: XMLNodeSet = document.css("meta[property='og:image']")
@@ -47,13 +62,9 @@ class ViewController: UIViewController {
     }
     
         
-    func grabHTML(url: String, completion: (document: HTMLDocument) -> Void) {
-        guard let myURL = NSURL(string: url) else {
-            print("Error: \(url) doesn't seem to be a valid URL")
-            return
-        }
+    func grabHTML(url: NSURL, completion: (document: HTMLDocument) -> Void) {
         do {
-            let myHTMLString = try String(contentsOfURL: myURL)
+            let myHTMLString = try String(contentsOfURL: url)
             //            print(myHTMLString)
             if let html = Kanna.HTML(html: myHTMLString, encoding: NSUTF8StringEncoding) {
                 completion(document: html)
