@@ -8,14 +8,21 @@
 
 import UIKit
 import Kanna
-import PlayerView
 import AVFoundation
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PlayerDelegate {
     
     @IBOutlet weak var subView: UIView!
     
-    let player = PlayerView(frame: CGRect(x: 10,y: 10,width: 300,height: 300))
+    
+
+    let player = Player()
+
+    
+    
+    
+    
+    
     
     var source: NSURL = NSURL(fileURLWithPath: "")
     
@@ -27,9 +34,14 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ViewController.getTheShit), name:
         UIApplicationWillEnterForegroundNotification, object: nil)
         
-        player.delegate = self
-        player.interval = CMTimeMake(1, 30)
-        subView.addSubview(player)
+        let screen: CGRect = self.view.frame
+        
+        self.player.delegate = self
+        self.player.view.backgroundColor = UIColor.whiteColor()
+        self.player.view.frame = CGRect(x: 0,y: 0, width: screen.width, height: screen.width)
+        self.player.playbackLoops = true
+        self.subView.addSubview(self.player.view)
+        self.player.didMoveToParentViewController(self)
         
         getTheShit()
     }
@@ -46,8 +58,8 @@ class ViewController: UIViewController {
             print(result)
             if let url = NSURL(string: result) {
                 self.source = url
-                self.player.url = self.source
-                self.player.play()
+                self.player.setUrl(url)
+                self.player.playFromBeginning()
             }
         }
     }
@@ -86,39 +98,26 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonTouch(sender: UIButton) {
-        self.player.currentTime = 0.0
+    }
+    
+    
+    func playerReady(player: Player) {
+    }
+    
+    func playerPlaybackStateDidChange(player: Player) {
+    }
+    
+    func playerBufferingStateDidChange(player: Player) {
+    }
+    
+    func playerPlaybackWillStartFromBeginning(player: Player) {
+    }
+    
+    func playerPlaybackDidEnd(player: Player) {
     }
     
     
 }
-
-
-extension ViewController: PlayerViewDelegate {
-    func playerVideo(player: PlayerView, loadedTimeRanges: [PlayerviewTimeRange]) {
-//        print(loadedTimeRanges.first!.end.seconds)
-    }
-    
-    func playerVideo(player: PlayerView, duration: Double) {
-        //the player knows the duration of the video to reproduce on seconds
-//        print(duration)
-    }
-    
-    func playerVideo(player: PlayerView, currentTime: Double) {
-        print(currentTime)
-        if currentTime > 13.0 {
-            self.player.currentTime = 0.0
-        }
-    }
-    
-    func playerVideo(playerFinished player: PlayerView) {
-        //when the video finishes the reproduction to the end
-        print("playerFinished")
-//        self.player.stop()
-//        self.player.currentTime = 0.0
-//        self.player.play()
-    }
-}
-
 
 
 

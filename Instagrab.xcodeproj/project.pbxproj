@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71AA3D001CEF09F6009E2B2A /* player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AA3CFF1CEF09F6009E2B2A /* player.swift */; };
 		71FB5BC41CED9D840024956D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5BC31CED9D840024956D /* AppDelegate.swift */; };
 		71FB5BC61CED9D840024956D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5BC51CED9D840024956D /* ViewController.swift */; };
 		71FB5BC91CED9D840024956D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71FB5BC71CED9D840024956D /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		71AA3CFF1CEF09F6009E2B2A /* player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = player.swift; sourceTree = "<group>"; };
 		71FB5BC01CED9D840024956D /* Instagrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB5BC31CED9D840024956D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71FB5BC51CED9D840024956D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			children = (
 				71FB5BC31CED9D840024956D /* AppDelegate.swift */,
 				71FB5BC51CED9D840024956D /* ViewController.swift */,
+				71AA3CFF1CEF09F6009E2B2A /* player.swift */,
 				71FB5BC71CED9D840024956D /* Main.storyboard */,
 				71FB5BCA1CED9D840024956D /* Assets.xcassets */,
 				71FB5BCC1CED9D840024956D /* LaunchScreen.storyboard */,
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71FB5BC61CED9D840024956D /* ViewController.swift in Sources */,
+				71AA3D001CEF09F6009E2B2A /* player.swift in Sources */,
 				71FB5BC41CED9D840024956D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +328,7 @@
 				71FB5BD41CED9D840024956D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
