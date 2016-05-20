@@ -13,7 +13,11 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
-    @IBOutlet var player: PlayerView!
+    @IBOutlet weak var subView: UIView!
+    
+    let player = PlayerView(frame: CGRect(x: 10,y: 10,width: 300,height: 300))
+    
+    var source: NSURL = NSURL(fileURLWithPath: "")
     
 //    let testUrl = "https://instagram.com/p/BAwilKUtf2H/"
 
@@ -22,6 +26,11 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ViewController.getTheShit), name:
         UIApplicationWillEnterForegroundNotification, object: nil)
+        
+        player.delegate = self
+        player.interval = CMTimeMake(1, 30)
+        subView.addSubview(player)
+        
         getTheShit()
     }
     
@@ -36,8 +45,8 @@ class ViewController: UIViewController {
         grabContent (pbsurl){ (result) in
             print(result)
             if let url = NSURL(string: result) {
-                
-                self.player.url = url
+                self.source = url
+                self.player.url = self.source
                 self.player.play()
             }
         }
@@ -75,7 +84,45 @@ class ViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func buttonTouch(sender: UIButton) {
+        self.player.currentTime = 0.0
+    }
+    
+    
 }
+
+
+extension ViewController: PlayerViewDelegate {
+    func playerVideo(player: PlayerView, loadedTimeRanges: [PlayerviewTimeRange]) {
+//        print(loadedTimeRanges.first!.end.seconds)
+    }
+    
+    func playerVideo(player: PlayerView, duration: Double) {
+        //the player knows the duration of the video to reproduce on seconds
+//        print(duration)
+    }
+    
+    func playerVideo(player: PlayerView, currentTime: Double) {
+        print(currentTime)
+        if currentTime > 13.0 {
+            self.player.currentTime = 0.0
+        }
+    }
+    
+    func playerVideo(playerFinished player: PlayerView) {
+        //when the video finishes the reproduction to the end
+        print("playerFinished")
+//        self.player.stop()
+//        self.player.currentTime = 0.0
+//        self.player.play()
+    }
+}
+
+
+
+
+
 
 
 
