@@ -1,4 +1,2 @@
 github "tid-kijyun/Kanna" ~> 1.0.0
 github "onevcat/Kingfisher" ~> 2.2
-github "davidlondono/PlayerView" >= 0.2.5
-
