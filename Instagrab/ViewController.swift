@@ -38,7 +38,7 @@ class ViewController: UIViewController, PlayerDelegate {
         
         self.player.delegate = self
         self.player.view.backgroundColor = UIColor.whiteColor()
-        self.player.view.frame = CGRect(x: 0,y: 0, width: screen.width, height: screen.width)
+        self.player.view.frame = subView.frame
         self.player.playbackLoops = true
         self.subView.addSubview(self.player.view)
         self.player.didMoveToParentViewController(self)
