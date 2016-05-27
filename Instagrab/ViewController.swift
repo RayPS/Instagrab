@@ -85,9 +85,10 @@ class ViewController: UIViewController, PlayerDelegate {
             let imageUrlString: String = image.first!["content"]!
             self.imageUrl = NSURL(string: imageUrlString)!
             
-//            self.photoView.kf_setImageWithURL(self.imageUrl)
             self.photoView.kf_setImageWithURL(self.imageUrl, completionHandler: { (image, error, cacheType, imageURL) in
-                self.button.enabled = true
+                if video.count <= 0 {
+                    self.button.enabled = true
+                }
             })
             
             if video.count > 0 {
@@ -121,7 +122,6 @@ class ViewController: UIViewController, PlayerDelegate {
     
     @IBAction func buttonTouch(sender: UIButton) {
         if self.videoUrl != nil {
-            
             player.export({ 
                 print("Video is saved!")
                 self.doneAlert()

@@ -478,24 +478,28 @@ extension Player {
     
     public func export(completion: () -> Void) {
         
+        
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0];
-        let filePath="\(documentsPath)/tempFile.mp4";
+        let filePath="\(documentsPath)/tempFile.mov";
         
         let exporter = AVAssetExportSession(asset: self.asset, presetName: AVAssetExportPresetHighestQuality)
         exporter!.outputURL = NSURL(string: filePath)
         exporter?.outputFileType = AVFileTypeMPEG4
         exporter!.exportAsynchronouslyWithCompletionHandler({
+            print(filePath)
             PHPhotoLibrary.sharedPhotoLibrary().performChanges({
                 PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: filePath))
             }) { completed, error in
                 if completed {
-                    print("asdasdasd")
                     completion()
-                    self.reset()
+//                    self.reset()
+                } else {
+                    print(error)
                 }
             }
             
         })
+     
         
     }
     
