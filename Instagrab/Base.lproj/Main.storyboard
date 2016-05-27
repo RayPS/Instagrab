@@ -37,7 +37,6 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="buttonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1eN-Q3-ijC"/>
                                     <action selector="buttonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WmP-Mh-sYa"/>
                                 </connections>
                             </button>

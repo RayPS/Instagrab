@@ -489,6 +489,7 @@ extension Player {
                 PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: filePath))
             }) { completed, error in
                 if completed {
+                    print("asdasdasd")
                     completion()
                     self.reset()
                 }

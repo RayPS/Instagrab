@@ -75,11 +75,6 @@ class ViewController: UIViewController, PlayerDelegate {
         grabContent(pbsurl)
     }
     
-    
-    @IBAction func buttonDidTouch(sender: AnyObject) {
-        self.player.view.hidden = true
-    }
-    
 
     func grabContent(url: NSURL) {
         grabHTML(url) { (document) in
@@ -126,10 +121,11 @@ class ViewController: UIViewController, PlayerDelegate {
     
     @IBAction func buttonTouch(sender: UIButton) {
         if self.videoUrl != nil {
-            player.export() {
+            
+            player.export({ 
                 print("Video is saved!")
                 self.doneAlert()
-            }
+            })
         } else {
             
             let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0];
