@@ -61,15 +61,20 @@ class ViewController: UIViewController, PlayerDelegate {
     
     
     func getTheShit() {
+        
+        button.hidden = false
+        button.enabled = false
+        photoView.image = nil
+        
         let pasteboardString: String? = UIPasteboard.generalPasteboard().string
         guard let pbsurl = NSURL(string: pasteboardString!) else {
             print("Error: \(pasteboardString) doesn't seem to be a valid URL")
             return
         }
-        
         print("Paste board : \(pbsurl)")
         grabContent(pbsurl)
     }
+    
     
     @IBAction func buttonDidTouch(sender: AnyObject) {
         self.player.view.hidden = true
@@ -85,7 +90,10 @@ class ViewController: UIViewController, PlayerDelegate {
             let imageUrlString: String = image.first!["content"]!
             self.imageUrl = NSURL(string: imageUrlString)!
             
-            self.photoView.kf_setImageWithURL(self.imageUrl)
+//            self.photoView.kf_setImageWithURL(self.imageUrl)
+            self.photoView.kf_setImageWithURL(self.imageUrl, completionHandler: { (image, error, cacheType, imageURL) in
+                self.button.enabled = true
+            })
             
             if video.count > 0 {
                 
@@ -117,7 +125,37 @@ class ViewController: UIViewController, PlayerDelegate {
     }
     
     @IBAction func buttonTouch(sender: UIButton) {
-        player.export()
+        if self.videoUrl != nil {
+            player.export() {
+                print("Video is saved!")
+                self.doneAlert()
+            }
+        } else {
+            
+            let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0];
+            let filePath="\(documentsPath)/tempFile.jpg";
+            let imageData = UIImageJPEGRepresentation(photoView.image!, 100)
+            imageData?.writeToFile(filePath, atomically: true)
+            
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromImageAtFileURL(NSURL(fileURLWithPath: filePath))
+            }) { completed, error in
+                if completed {
+                    self.doneAlert()
+                    print("Image is saved!")
+                }
+            }
+
+        }
+        
+    }
+    
+    func doneAlert() {
+        let alert = UIAlertController(title: "Saved!", message: "saved to your photo library.", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default,handler: nil))
+        self.presentViewController(alert, animated: true) {
+            self.button.hidden = true
+        }
     }
     
     
@@ -138,6 +176,7 @@ class ViewController: UIViewController, PlayerDelegate {
             button.enabled = false
         } else {
             button.enabled = true
+            photoView.image = nil
         }
         
     }

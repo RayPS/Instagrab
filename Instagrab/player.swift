@@ -472,9 +472,11 @@ public class Player: UIViewController {
 extension Player {
     
     public func reset() {
+        self.stop()
+        self.setupPlayerItem(nil)
     }
     
-    public func export() {
+    public func export(completion: () -> Void) {
         
         let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0];
         let filePath="\(documentsPath)/tempFile.mp4";
@@ -487,7 +489,8 @@ extension Player {
                 PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: filePath))
             }) { completed, error in
                 if completed {
-                    print("Video is saved!")
+                    completion()
+                    self.reset()
                 }
             }
             
