@@ -26,8 +26,16 @@
                                     <constraint firstAttribute="width" secondItem="ugP-0u-aCF" secondAttribute="height" multiplier="4:5" id="45S-lP-jxL"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zke-rb-dUX">
-                                <rect key="frame" x="176" y="569" width="22" height="22"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zke-rb-dUX">
+                                <rect key="frame" x="87.5" y="547" width="200" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7Fg-Fi-Pvk"/>
+                                    <constraint firstAttribute="width" constant="200" id="tCq-bX-Ti5"/>
+                                </constraints>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="buttonDidTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1eN-Q3-ijC"/>
                                     <action selector="buttonTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WmP-Mh-sYa"/>
@@ -36,6 +44,8 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Zke-rb-dUX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9L6-7s-1IF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zke-rb-dUX" secondAttribute="bottom" constant="70" id="JsN-FF-wg4"/>
                             <constraint firstItem="ugP-0u-aCF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="QRK-N1-dl1"/>
                             <constraint firstItem="ugP-0u-aCF" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="b8X-bA-new"/>
                             <constraint firstItem="ugP-0u-aCF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ydW-j4-mOo"/>
@@ -50,6 +60,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="button" destination="Zke-rb-dUX" id="k0A-mO-p7u"/>
                         <outlet property="subView" destination="ugP-0u-aCF" id="RRH-N0-EQ6"/>
                     </connections>
                 </viewController>

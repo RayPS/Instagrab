@@ -15,6 +15,7 @@ import Photos
 class ViewController: UIViewController, PlayerDelegate {
     
     @IBOutlet weak var subView: UIView!
+    @IBOutlet weak var button: UIButton!
     
     
 
@@ -46,6 +47,14 @@ class ViewController: UIViewController, PlayerDelegate {
         self.player.playbackLoops = true
         self.subView.addSubview(self.player.view)
         self.player.didMoveToParentViewController(self)
+        
+        self.button.layer.borderColor = UIColor.blackColor().CGColor
+        self.button.layer.borderWidth = 1.0
+        self.button.layer.cornerRadius = 5.0
+        self.button.layer.masksToBounds = true
+        self.button.setTitle("Loading...", forState: .Disabled)
+        self.button.setTitle("Save", forState: .Normal)
+        
         
         getTheShit()
     }
@@ -113,7 +122,7 @@ class ViewController: UIViewController, PlayerDelegate {
     
     
     func playerReady(player: Player) {
-        print("...Player Ready")
+        print("...Can Play")
         if self.videoUrl == nil {
             self.player.stop()
             self.player.view.hidden = true
@@ -121,16 +130,14 @@ class ViewController: UIViewController, PlayerDelegate {
     }
     
     func playerPlaybackStateDidChange(player: Player) {
-        print("...playerPlaybackStateDidChange")
+//        print("...playerPlaybackStateDidChange")
     }
     
     func playerBufferingStateDidChange(player: Player) {
         if player.bufferingState == BufferingState.Unknown {
-            print("...Downloading...")
+            button.enabled = false
         } else {
-            print("...Downloaded")
-            
-            print(player.reset())
+            button.enabled = true
         }
         
     }
