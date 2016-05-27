@@ -9,6 +9,7 @@
 import UIKit
 import Kanna
 import AVFoundation
+import Kingfisher
 
 class ViewController: UIViewController, PlayerDelegate {
     
@@ -17,16 +18,13 @@ class ViewController: UIViewController, PlayerDelegate {
     
 
     let player = Player()
-
+    let photoView = UIImageView()
+    
+    var imageUrl: NSURL = NSURL()
+    var videoUrl: NSURL? = nil
     
     
-    
-    
-    
-    
-    var source: NSURL = NSURL(fileURLWithPath: "")
-    
-//    let testUrl = "https://instagram.com/p/BAwilKUtf2H/"
+//    let testUrl = "https://instagram.com/p/BAwilKUtf2H/" "https://instagram.com/p/BBmgXFItf0w/"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,12 @@ class ViewController: UIViewController, PlayerDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ViewController.getTheShit), name:
         UIApplicationWillEnterForegroundNotification, object: nil)
         
-        let screen: CGRect = self.view.frame
+        self.view.backgroundColor = UIColor.whiteColor()
+        
+        self.photoView.frame = subView.frame
+        self.photoView.kf_showIndicatorWhenLoading = true
+        self.photoView.contentMode = .ScaleAspectFit
+        self.subView.addSubview(photoView)
         
         self.player.delegate = self
         self.player.view.backgroundColor = UIColor.whiteColor()
@@ -54,31 +57,37 @@ class ViewController: UIViewController, PlayerDelegate {
             return
         }
         
-        grabContent (pbsurl){ (result) in
-            print(result)
-            if let url = NSURL(string: result) {
-                self.source = url
-                self.player.setUrl(url)
-                self.player.playFromBeginning()
-            }
-        }
+        print("Paste board : \(pbsurl)")
+        grabContent(pbsurl)
     }
+    
+    @IBAction func buttonDidTouch(sender: AnyObject) {
+        self.player.view.hidden = true
+    }
+    
 
-    func grabContent(url: NSURL, completion: (result: String) -> Void) {
+    func grabContent(url: NSURL) {
         grabHTML(url) { (document) in
             
             let video: XMLNodeSet = document.css("meta[property='og:video']")
             let image: XMLNodeSet = document.css("meta[property='og:image']")
             
-            var metaTag: XMLElement
+            let imageUrlString: String = image.first!["content"]!
+            self.imageUrl = NSURL(string: imageUrlString)!
+            
+            self.photoView.kf_setImageWithURL(self.imageUrl)
             
             if video.count > 0 {
-                metaTag = video.first!
+                
+                let videoUrlString: String = video.first!["content"]!
+                self.videoUrl = NSURL(string: videoUrlString)!
+                self.player.view.hidden = false
+                self.player.setUrl(self.videoUrl!)
+                self.player.playFromBeginning()
             } else {
-                metaTag = image.first!
+                self.videoUrl = nil
+                print("This is not a video")
             }
-            
-            completion(result: metaTag["content"]!)
         }
     }
     
@@ -98,22 +107,39 @@ class ViewController: UIViewController, PlayerDelegate {
     }
     
     @IBAction func buttonTouch(sender: UIButton) {
+        player.export()
     }
     
     
     func playerReady(player: Player) {
+        print("...Player Ready")
+        if self.videoUrl == nil {
+            self.player.stop()
+            self.player.view.hidden = true
+        }
     }
     
     func playerPlaybackStateDidChange(player: Player) {
+        print("...playerPlaybackStateDidChange")
     }
     
     func playerBufferingStateDidChange(player: Player) {
+        if player.bufferingState == BufferingState.Unknown {
+            print("...Downloading...")
+        } else {
+            print("...Downloaded")
+            
+            print(player.reset())
+        }
+        
     }
     
     func playerPlaybackWillStartFromBeginning(player: Player) {
+        print("...SRART")
     }
     
     func playerPlaybackDidEnd(player: Player) {
+        print("...END")
     }
     
     

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		715C707A1CF802A3009615BE /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 715C70791CF802A3009615BE /* Kingfisher.framework */; };
+		715C707B1CF802A3009615BE /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 715C70791CF802A3009615BE /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71AA3D001CEF09F6009E2B2A /* player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71AA3CFF1CEF09F6009E2B2A /* player.swift */; };
 		71FB5BC41CED9D840024956D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5BC31CED9D840024956D /* AppDelegate.swift */; };
 		71FB5BC61CED9D840024956D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71FB5BC51CED9D840024956D /* ViewController.swift */; };
@@ -27,6 +29,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				71FB5BDB1CEDBB8E0024956D /* PlayerView.framework in Embed Frameworks */,
+				715C707B1CF802A3009615BE /* Kingfisher.framework in Embed Frameworks */,
 				71FB5BD71CEDA01A0024956D /* Kanna.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -35,6 +38,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		715C70791CF802A3009615BE /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		71AA3CFF1CEF09F6009E2B2A /* player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = player.swift; sourceTree = "<group>"; };
 		71FB5BC01CED9D840024956D /* Instagrab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagrab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FB5BC31CED9D840024956D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				71FB5BDA1CEDBB8E0024956D /* PlayerView.framework in Frameworks */,
+				715C707A1CF802A3009615BE /* Kingfisher.framework in Frameworks */,
 				71FB5BD61CEDA01A0024956D /* Kanna.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +68,7 @@
 		71FB5BB71CED9D840024956D = {
 			isa = PBXGroup;
 			children = (
+				715C70791CF802A3009615BE /* Kingfisher.framework */,
 				71FB5BD91CEDBB8E0024956D /* PlayerView.framework */,
 				71FB5BD51CEDA01A0024956D /* Kanna.framework */,
 				71FB5BC21CED9D840024956D /* Instagrab */,
