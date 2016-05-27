@@ -10,6 +10,7 @@ import UIKit
 import Kanna
 import AVFoundation
 import Kingfisher
+import Photos
 
 class ViewController: UIViewController, PlayerDelegate {
     

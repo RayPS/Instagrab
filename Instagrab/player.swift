@@ -28,6 +28,7 @@ import UIKit
 import Foundation
 import AVFoundation
 import CoreGraphics
+import Photos
 
 public enum PlaybackState: Int, CustomStringConvertible {
     case Stopped = 0
@@ -471,6 +472,27 @@ public class Player: UIViewController {
 extension Player {
     
     public func reset() {
+    }
+    
+    public func export() {
+        
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0];
+        let filePath="\(documentsPath)/tempFile.mp4";
+        
+        let exporter = AVAssetExportSession(asset: self.asset, presetName: AVAssetExportPresetHighestQuality)
+        exporter!.outputURL = NSURL(string: filePath)
+        exporter?.outputFileType = AVFileTypeMPEG4
+        exporter!.exportAsynchronouslyWithCompletionHandler({
+            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
+                PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(NSURL(fileURLWithPath: filePath))
+            }) { completed, error in
+                if completed {
+                    print("Video is saved!")
+                }
+            }
+            
+        })
+        
     }
     
 }
